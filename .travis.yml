@@ -1,0 +1,19 @@
+language: objective-c
+env:
+  matrix:
+    - FORMULA_VERSION=
+    - FORMULA_VERSION=--HEAD
+rvm: system
+before_install:
+  - brew update
+  - brew --env
+  - brew config
+install:
+  - mkdir -p $(brew --repo)/Library/Taps/neovim-qt
+  - ln -s $TRAVIS_BUILD_DIR $(brew --repo)/Library/Taps/neovim-qt
+script:
+  - brew install neovim-qt $FORMULA_VERSION --verbose
+  - brew audit neovim-qt --strict
+  - brew test neovim-qt
+matrix:
+  fast_finish: true
