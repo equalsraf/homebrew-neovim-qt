@@ -11,7 +11,7 @@ class NeovimQt < Formula
 
   def install
     mkdir "build" do
-      system "cmake", ".."
+      system "cmake", "-DCMAKE_BUILD_TYPE=Release", ".."
       system "make"
       prefix.install "bin/nvim-qt.app"
       bin.install_symlink prefix/"nvim-qt.app/Contents/MacOS/nvim-qt"
