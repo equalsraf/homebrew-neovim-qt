@@ -1,5 +1,6 @@
 language: objective-c
 os: osx
+osx_image: xcode12.2
 env:
   matrix:
     - FORMULA_VERSION=

@@ -6,7 +6,7 @@ class NeovimQt < Formula
   head "https://github.com/equalsraf/neovim-qt.git"
 
   depends_on "cmake" => :build
-  depends_on "qt"
+  depends_on "qt@5"
   depends_on "neovim"
 
   def install
