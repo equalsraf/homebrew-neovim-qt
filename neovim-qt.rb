@@ -6,20 +6,20 @@ class NeovimQt < Formula
   head "https://github.com/equalsraf/neovim-qt.git"
 
   depends_on "cmake" => :build
-  depends_on "qt@5"
   depends_on "neovim"
+  depends_on "qt@5"
 
   def install
     mkdir "build" do
       system "cmake", "-DCMAKE_BUILD_TYPE=Release", ".."
       system "make"
 
-      on_macos do
+      if OS.mac? then
         prefix.install "bin/nvim-qt.app"
         bin.install_symlink prefix/"nvim-qt.app/Contents/MacOS/nvim-qt"
       end
 
-      on_linux do
+      if OS.linux? then
         bin.install "bin/nvim-qt"
       end
     end
