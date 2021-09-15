@@ -14,12 +14,12 @@ class NeovimQt < Formula
       system "cmake", "-DCMAKE_BUILD_TYPE=Release", ".."
       system "make"
 
-      if OS.mac? then
+      if OS.mac?
         prefix.install "bin/nvim-qt.app"
         bin.install_symlink prefix/"nvim-qt.app/Contents/MacOS/nvim-qt"
       end
 
-      if OS.linux? then
+      if OS.linux?
         bin.install "bin/nvim-qt"
       end
     end
