@@ -1,0 +1,38 @@
+name: Build And Test
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  BuildTest:
+    name: ${{ matrix.name }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: MacOS
+            runner: macos-latest
+            brew_args:
+          - name: MacOS-HEAD
+            runner: macos-latest
+            brew_args: --HEAD
+    runs-on: ${{ matrix.runner }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Tap
+        if: ${{ startsWith(matrix.runner, 'macos') }}
+        run: |
+          pwd
+          mkdir -p $(brew --repo)/Library/Taps/
+          ln -s $(pwd) $(brew --repo)/Library/Taps/neovim-qt
+          ls -lh $(brew --repo)/Library/Taps/neovim-qt
+      - name: MacOS
+        if: ${{ startsWith(matrix.runner, 'macos') }}
+        run: |
+          brew install --verbose --build-from-source ${{matrix.brew_args}} ./neovim-qt.rb
+          brew audit ./neovim-qt.rb
+          brew test ./neovim-qt.rb
+
