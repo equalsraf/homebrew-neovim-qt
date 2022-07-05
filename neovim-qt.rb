@@ -1,8 +1,12 @@
+# typed: true
+# frozen_string_literal: true
+
+# brew recipe for neovim-qt
 class NeovimQt < Formula
   desc "Neovim GUI, in Qt5"
   homepage "https://github.com/equalsraf/neovim-qt"
-  url "https://github.com/equalsraf/neovim-qt/archive/v0.2.16.1.tar.gz"
-  sha256 "971d4597b40df2756b313afe1996f07915643e8bf10efe416b64cc337e4faf2a"
+  url "https://github.com/equalsraf/neovim-qt/archive/v0.2.17.tar.gz"
+  sha256 "ac538c2e5d63572dd0543c13fafb4d428e67128ea676467fcda68965b2aacda1"
   head "https://github.com/equalsraf/neovim-qt.git"
 
   depends_on "cmake" => :build
@@ -17,9 +21,7 @@ class NeovimQt < Formula
       if OS.mac?
         prefix.install "bin/nvim-qt.app"
         bin.install_symlink prefix/"nvim-qt.app/Contents/MacOS/nvim-qt"
-      end
-
-      if OS.linux?
+      elsif OS.linux?
         bin.install "bin/nvim-qt"
       end
     end
