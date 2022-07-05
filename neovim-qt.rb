@@ -1,3 +1,7 @@
+# typed: true
+# frozen_string_literal: true
+
+# brew recipe for neovim-qt
 class NeovimQt < Formula
   desc "Neovim GUI, in Qt5"
   homepage "https://github.com/equalsraf/neovim-qt"
@@ -17,9 +21,7 @@ class NeovimQt < Formula
       if OS.mac?
         prefix.install "bin/nvim-qt.app"
         bin.install_symlink prefix/"nvim-qt.app/Contents/MacOS/nvim-qt"
-      end
-
-      if OS.linux?
+      elsif OS.linux?
         bin.install "bin/nvim-qt"
       end
     end
